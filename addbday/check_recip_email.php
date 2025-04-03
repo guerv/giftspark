@@ -1,5 +1,5 @@
 <?php 
-include "connect.php";
+include "../connect.php";
 
 $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
 
