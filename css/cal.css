@@ -1,0 +1,31 @@
+* {
+    margin:0; 
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+#navbar {
+
+    padding:10px;
+    background-color: #E56B6F;
+    border-bottom-right-radius: 20px;
+    max-width: 110px; /* ID ONT KNOW !!!*/
+}
+
+#calendar {
+    display:grid;
+    grid: '. . . . . .';
+}
+#calendar div {
+    border:1px solid black;
+}
+
+
+#footer {
+    background-color: #E56B6F;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    min-height:150px;
+    color: #F8C9B0;
+    padding: 20px;
+}
