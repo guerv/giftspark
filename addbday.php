@@ -7,6 +7,8 @@
 
 $gifts = [];
 
+
+
 ?>
 <html>
 
@@ -25,12 +27,17 @@ $gifts = [];
             let gift_text = document.getElementById("new_gifts");
             let gifts_to_pass = document.getElementById("gifts_pass");
 
+            // checking email
+            let email_input = document.getElementById("new_email"); 
+            let email_feedback = document.getElementById("email_feedback");
+            let submit_btn = document.getElementById("submit");
+
 
             let gifts = [];
 
 
             submit_gift.addEventListener("click", add_gift);
-
+            email_input.addEventListener("input", check_email_exists);
 
             function render_gifts() {
                 gift_list_node.innerHTML = "";
@@ -73,6 +80,28 @@ $gifts = [];
                 render_gifts();
             }
 
+            function check_email_exists() {
+                let email = email_input.value;
+
+                let params = "email=" + encodeURIComponent(email);
+                let config = {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/x-www-form-urlencoded"},
+                    body: params 
+                }; 
+                fetch("check_recip_email.php", config)
+                    .then(response => response.json()) // for associative array
+                    .then(data => {
+                        if (data.exists) {
+                            email_feedback.innerHTML = "Email already registered."; 
+                            submit_btn.disabled = true;
+                        } else {
+                            email_feedback.innerHTML = ""; 
+                            submit_btn.disabled = false;
+                        }
+                    })
+            }
+
         });
     </script>
 </head>
@@ -102,6 +131,7 @@ $gifts = [];
         </div>
         <div>
             <input type="text" name="new_email" id="new_email" required />
+            <span id="email_feedback"></span>
         </div>
 
         <br />
@@ -121,7 +151,7 @@ $gifts = [];
 
         <br />
 
-        <input type="submit" />
+        <input type="submit" id="submit" />
     </form>
 </body>
 
