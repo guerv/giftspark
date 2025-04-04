@@ -22,6 +22,9 @@ $gifts = [];
 
     <script>
         window.addEventListener("load", function(event) {
+
+            check_email_exists(); 
+            
             let submit_gift = document.getElementById("add_gift");
             let gift_list_node = document.getElementById("gift_list");
             let gift_text = document.getElementById("new_gifts");
