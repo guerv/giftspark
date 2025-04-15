@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isofolio - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- Header Section -->
+        <div id="header_content">
+            <h1>Welcome Back!</h1>
+            <h2>Login to access your birthday reminders</h2>
+        </div>
+
+        <!-- Login Card -->
+        <div id="login_card">
+            <div id="card_title">Login</div>
+            
+            <!-- Success message after signup (hidden by default) -->
+            <div id="signup_success" class="success-message">
+                Account created successfully! Please login.
+            </div>
+
+            <!-- Error message container -->
+            <div id="login_errors"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm" action="php/login.php" method="POST">
+                <div class="form_group">
+                    <label for="login_email">Email:</label>
+                    <input type="email" id="login_email" name="email" required>
+                </div>
+
+                <div class="form_group">
+                    <label for="login_password">Password:</label>
+                    <input type="password" id="login_password" name="password" required>
+                </div>
+
+                <button type="submit" id="login_btn">Login</button>
+            </form>
+
+            <p>Don't have an account? <a href="index.html">Create one</a></p>
+        </div>
+
+        <!-- Footer -->
+        <div id="footer">
+            <p>© 2025 Isofolio - Birthday Reminder App</p>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle showing success message -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check URL for signup success parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const signupSuccess = urlParams.get('signup');
+            
+            if (signupSuccess === 'success') {
+                const successMessage = document.getElementById('signup_success');
+                successMessage.style.display = 'block';
+                
+                // Remove the parameter from URL without reloading
+                history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            // Check for error parameters
+            const error = urlParams.get('error');
+            if (error) {
+                const errorContainer = document.getElementById('login_errors');
+                let errorMessage = '';
+                
+                switch(error) {
+                    case 'invalid_credentials':
+                        errorMessage = 'Invalid email or password';
+                        break;
+                    case 'database_error':
+                        errorMessage = 'System error. Please try again later.';
+                        break;
+                    default:
+                        errorMessage = 'Login failed. Please try again.';
+                }
+                
+                const errorElement = document.createElement('p');
+                errorElement.className = 'error-message';
+                errorElement.textContent = errorMessage;
+                errorContainer.appendChild(errorElement);
+            }
+        });
+    </script>
+</body>
+</html>
