@@ -16,19 +16,25 @@
     </head>
 
     <body>
-        <div id="navbar"></div>
-        <div id="calContainer">
-            <div id="calNav">
-                <div id="dateLabel"></div>
-                <div id="navInput">
-                    <input type="button" id="prev" value="<-" >
-                    <input type="button" id="today" value="Today">
-                    <input type="button" id="next" value="->">
-                </div>
-            </div>
+        <div id="navbar">
+            <img src="images/navbarlogoSMALL.png" width="50px" />
+            <h1>GiftSpark</h1>
+        </div>
 
-            <div id="weekdays" class="weekdays"></div>
-            <div id="days" class="days"></div>
+        <div id="container">
+            <div id="calContainer">
+                <div id="calNav">
+                    <div><h3 id="dateLabel"></h3></div>
+                    <div id="navInput">
+                        <input type="button" id="prev" value="<" />
+                        <input type="button" id="today" value="Today" />
+                        <input type="button" id="next" value=">" />
+                    </div>
+                </div>
+
+                <div id="weekdays" class="weekdays"></div>
+                <div id="days" class="days"></div>
+            </div>
         </div>
     </body>
 </html>

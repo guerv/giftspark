@@ -1,15 +1,28 @@
 body {
+    background-color: #FDDDCC;
+    color:#355070;
+    font-family: sans-serif;
+    margin:0;
+}
+
+#navbar {
+    background-color: #E56B6F;
+    color: #ffe6d9;
+
+    display:flex; 
+    align-items: center;
+    padding:2%;
+    gap:20px;
+}
+
+#container {
     display: flex; 
     justify-content: center;
     align-items: center;
-    margin:0; 
-    background-color: #FDDDCC;
-    color:#355070;
+    padding:10px;
 }
-
 #calContainer {
     width: 100%; 
-    
 }
 #calNav {
     display:flex; 
@@ -40,7 +53,8 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    padding:30px;
 }
 .day.otherMonth {
-    color:gray;
+    color:#637a95;
 }

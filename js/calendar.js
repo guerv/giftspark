@@ -15,7 +15,7 @@ window.addEventListener("load", function (event) {
 
     weekdays.forEach(day => {
         let dayNode = document.createElement("div");
-        let text = document.createElement("p");
+        let text = document.createElement("strong");
         text.innerHTML = day;
         dayNode.appendChild(text);
         weekdaysNode.appendChild(dayNode);
@@ -69,6 +69,7 @@ window.addEventListener("load", function (event) {
             daysNode.appendChild(dayNode);
         }
 
+        // next month's days
         for (let i = 1; i <= daysNextMonth; i++) {
             let dayNode = document.createElement("div");
             dayNode.classList.add("day", "otherMonth");
