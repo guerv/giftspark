@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>AAAAAAAAAAAAAAAA</title>
+        <title>Calendar</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png" />
         <meta name="viewport" content="width=device-width" />
 
@@ -15,104 +15,108 @@
         <script>
             window.addEventListener("load", function(event) 
             {
-                let month_year_node = document.getElementById("month_year");
-                let prev_month_btn = document.getElementById("prev_month");
-                let next_month_btn = document.getElementById("next_month"); 
-                let cal = document.getElementById("cal"); 
+                let today = new Date();
+                let currentDate = new Date(); 
 
-                let current_date = new Date(); 
+                let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; 
+                let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-                function render_cal(year, month) {
-                    month_year_node.innerHTML = new Intl.DateTimeFormat('en-US', {month: 'long', year:'numeric'}).format(new Date(year,month)); 
 
-                    let firstday_currmonth = new Date(year, month, 1).getDay();
-                    let lastday_currmonth = new Date(year, month + 1, 0).getDate(); 
-                    let lastday_prevmonth = new Date(year, month, 0).getDate(); 
+                let dateLabelNode = document.getElementById("dateLabel");
+                let weekdaysNode = document.getElementById("weekdays"); 
+                let daysNode = document.getElementById("days"); 
+                let prevBtn = document.getElementById("prev");
+                let todayBtn = document.getElementById("today"); 
+                let nextBtn = document.getElementById("next");
 
-                    //clear
-                    cal.innerHTML = `
-                        <div class="day header">Sun</div>
-                        <div class="day header">Mon</div>
-                        <div class="day header">Tue</div>
-                        <div class="day header">Wed</div>
-                        <div class="day header">Thu</div>
-                        <div class="day header">Fri</div>
-                        <div class="day header">Sat</div>
-                    `;
+                weekdays.forEach(day => {
+                    let dayNode = document.createElement("div"); 
+                    let text = document.createElement("p");
+                    text.innerHTML = day; 
+                    dayNode.appendChild(text);
+                    weekdaysNode.appendChild(dayNode);
+                }); 
 
-                    // prev month
-                    for (let i = firstday_currmonth - 1; i >= 0; i--) {
-                        let day = document.createElement("div");
-                        day.classList.add("day", "other_month"); 
-                        day.innerHTML = lastday_prevmonth - i; 
-                        cal.appendChild(day);
+                prevBtn.addEventListener("click", function(event)
+                {
+                    currentDate.setMonth(currentDate.getMonth() - 1);
+                    renderCal(); 
+                }); 
+
+                nextBtn.addEventListener("click", function(event)
+                {
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    renderCal(); 
+                }); 
+
+                todayBtn.addEventListener("click", function(event)
+                {
+                    currentDate = new Date(); 
+                    renderCal();
+                }); 
+
+                function renderCal() {
+                    dateLabelNode.innerHTML = months[currentDate.getMonth()] + " " + currentDate.getFullYear(); 
+
+                    daysNode.innerHTML = ''; 
+
+                    let firstDayMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1); 
+                    let lastDayMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                    let monthLength = lastDayMonth.getDate(); 
+
+                    let startDay = firstDayMonth.getDay();
+                    let daysPrevMonth = startDay;
+
+                    let endDay = lastDayMonth.getDay(); 
+                    let daysNextMonth = 6 - endDay; 
+
+                    let prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate(); 
+
+                    // previous month's days
+                    for (let i = daysPrevMonth - 1; i >= 0; i--) {
+                        let dayNode = document.createElement("div");
+                        dayNode.classList.add("day", "otherMonth"); 
+                        dayNode.innerHTML = prevMonthLastDay - i; 
+                        daysNode.appendChild(dayNode);
                     }
 
                     // current month
-                    for (let day_index = 1; day_index <= lastday_currmonth; day_index ++) {
-                        let day = document.createElement("div");
-                        day.classList.add("day");
-                        day.innerHTML = day_index;
-                        cal.appendChild(day);
+                    for (let i = 1; i <= monthLength; i++) {
+                        let dayNode = document.createElement("div");
+                        dayNode.classList.add("day");
+                        dayNode.innerHTML = i; 
+                        daysNode.appendChild(dayNode);
                     }
 
-                    // add next month to fill grid
-                    let total_days = cal.children.length;
-                    let next_month_day = 1;
-                    while (total_days + next_month_day <= 42) { // 6 x7
-                        let day = document.createElement("div");
-                        day.classList.add("day", "other_month");
-                        day.innerHTML = next_month_day++; 
-                        cal.appendChild(day);
-
+                    for (let i = 1; i <= daysNextMonth; i++) {
+                        let dayNode = document.createElement("div"); 
+                        dayNode.classList.add("day", "otherMonth"); 
+                        dayNode.innerHTML = i; 
+                        daysNode.appendChild(dayNode);
                     }
                 }
 
-                prev_month_btn.addEventListener("click", () => {
-                    current_date.setMonth(current_date.getMonth() - 1);
-                    render_cal(current_date.getFullYear(), current_date.getMonth());
-                }); 
+                //render on load!
+                renderCal(); 
 
-                next_month_btn.addEventListener("click", () => {
-                    current_date.setMonth(current_date.getMonth() + 1);
-                    render_cal(current_date.getFullYear(), current_date.getMonth());
-                });
-
-                render_cal(current_date.getFullYear(), current_date.getMonth());
             }); 
         </script>
     </head>
 
     <body>
-        <div id="navbar"> 
-            <div>
-                <img src="images/navbarlogo.png" width="75px" />
+        <div id="navbar"></div>
+        <div id="calContainer">
+            <div id="calNav">
+                <div id="dateLabel"></div>
+                <div id="navInput">
+                    <input type="button" id="prev" value="<-" >
+                    <input type="button" id="today" value="Today">
+                    <input type="button" id="next" value="->">
+                </div>
             </div>
+
+            <div id="weekdays" class="weekdays"></div>
+            <div id="days" class="days"></div>
         </div>
-
-
-        <div id="cal_container">
-            <div id="cal_header">
-                <input type="button" id="prev_month" value="<-"/>
-                <h2 id="month_year"></h2>
-                <input type="button" id="next_month" value="->" />
-            </div>
-            <div id="cal">
-                <div class="day header">Sun</div>
-                <div class="day header">Mon</div>
-                <div class="day header">Tue</div>
-                <div class="day header">Wed</div>
-                <div class="day header">Thu</div>
-                <div class="day header">Fri</div>
-                <div class="day header">Sat</div>
-            </div>
-        </div>
-
-
-        <div id="footer">
-            <h3>GiftSpark</h3>
-            <p>&copy; 2025 IsoFolio</p>
-        </div>
-
     </body>
 </html>
