@@ -11,6 +11,76 @@
         <meta name="viewport" content="width=device-width" />
 
         <link rel="stylesheet" href="css/cal.css" />
+
+        <script>
+            window.addEventListener("load", function(event) 
+            {
+                let month_year_node = document.getElementById("month_year");
+                let prev_month_btn = document.getElementById("prev_month");
+                let next_month_btn = document.getElementById("next_month"); 
+                let cal = document.getElementById("cal"); 
+
+                let current_date = new Date(); 
+
+                function render_cal(year, month) {
+                    month_year_node.innerHTML = new Intl.DateTimeFormat('en-US', {month: 'long', year:'numeric'}).format(new Date(year,month)); 
+
+                    let firstday_currmonth = new Date(year, month, 1).getDay();
+                    let lastday_currmonth = new Date(year, month + 1, 0).getDate(); 
+                    let lastday_prevmonth = new Date(year, month, 0).getDate(); 
+
+                    //clear
+                    cal.innerHTML = `
+                        <div class="day header">Sun</div>
+                        <div class="day header">Mon</div>
+                        <div class="day header">Tue</div>
+                        <div class="day header">Wed</div>
+                        <div class="day header">Thu</div>
+                        <div class="day header">Fri</div>
+                        <div class="day header">Sat</div>
+                    `;
+
+                    // prev month
+                    for (let i = firstday_currmonth - 1; i >= 0; i--) {
+                        let day = document.createElement("div");
+                        day.classList.add("day", "other_month"); 
+                        day.innerHTML = lastday_prevmonth - i; 
+                        cal.appendChild(day);
+                    }
+
+                    // current month
+                    for (let day_index = 1; day_index <= lastday_currmonth; day_index ++) {
+                        let day = document.createElement("div");
+                        day.classList.add("day");
+                        day.innerHTML = day_index;
+                        cal.appendChild(day);
+                    }
+
+                    // add next month to fill grid
+                    let total_days = cal.children.length;
+                    let next_month_day = 1;
+                    while (total_days + next_month_day <= 42) { // 6 x7
+                        let day = document.createElement("div");
+                        day.classList.add("day", "other_month");
+                        day.innerHTML = next_month_day++; 
+                        cal.appendChild(day);
+
+                    }
+                }
+
+                prev_month_btn.addEventListener("click", () => {
+                    current_date.setMonth(current_date.getMonth() - 1);
+                    render_cal(current_date.getFullYear(), current_date.getMonth());
+                }); 
+
+                next_month_btn.addEventListener("click", () => {
+                    current_date.setMonth(current_date.getMonth() + 1);
+                    render_cal(current_date.getFullYear(), current_date.getMonth());
+                });
+
+                render_cal(current_date.getFullYear(), current_date.getMonth());
+            }); 
+        </script>
     </head>
 
     <body>
@@ -20,56 +90,24 @@
             </div>
         </div>
 
-        <h2>January</h2>
-        <div id="container">
 
-            <div id="calendar">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
-                <div>11</div>
-                <div>12</div>
-                <div>13</div>
-                <div>14</div>
-                <div>15</div>
-                <div>16</div>
-                <div>17</div>
-                <div>18</div>
-                <div>19</div>
-                <div>20</div>
-                <div>21</div>
-                <div>22</div>
-                <div>23</div>
-                <div>24</div>
-                <div>25</div>
-                <div>26</div>
-                <div>27</div>
-                <div>28</div>
-                <div>29</div>
-                <div>30</div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <div id="cal_container">
+            <div id="cal_header">
+                <input type="button" id="prev_month" value="<-"/>
+                <h2 id="month_year"></h2>
+                <input type="button" id="next_month" value="->" />
             </div>
-
-
+            <div id="cal">
+                <div class="day header">Sun</div>
+                <div class="day header">Mon</div>
+                <div class="day header">Tue</div>
+                <div class="day header">Wed</div>
+                <div class="day header">Thu</div>
+                <div class="day header">Fri</div>
+                <div class="day header">Sat</div>
+            </div>
         </div>
+
 
         <div id="footer">
             <h3>GiftSpark</h3>
