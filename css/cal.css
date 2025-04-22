@@ -44,17 +44,22 @@ body {
 #days {
     display: grid; 
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px; 
-    padding:10px;
+    padding: 10px;
 }
 
+.day p {
+    margin:0;
+}
 .day {
     display:flex; 
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding:30px;
+    border:1px solid #355070;
+    padding:5px;
 }
+
 .day.otherMonth {
     color:#637a95;
+}
+
+.event {
+    min-height: 65px;
 }

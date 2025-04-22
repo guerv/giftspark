@@ -56,24 +56,48 @@ window.addEventListener("load", function (event) {
         // previous month's days
         for (let i = daysPrevMonth - 1; i >= 0; i--) {
             let dayNode = document.createElement("div");
+            let dayTextNode = document.createElement("p"); 
+            let eventSpace = document.createElement("div");
+
+            eventSpace.classList.add("event");
+            
+            dayTextNode.innerHTML = prevMonthLastDay - i; 
             dayNode.classList.add("day", "otherMonth");
-            dayNode.innerHTML = prevMonthLastDay - i;
+
+            dayNode.appendChild(eventSpace);
+            dayNode.appendChild(dayTextNode); 
             daysNode.appendChild(dayNode);
         }
 
         // current month
         for (let i = 1; i <= monthLength; i++) {
             let dayNode = document.createElement("div");
+            let dayTextNode = document.createElement("p"); 
+            let eventSpace = document.createElement("div");
+
+            eventSpace.classList.add("event");
+
+            dayTextNode.innerHTML = i; 
             dayNode.classList.add("day");
-            dayNode.innerHTML = i;
+
+            dayNode.appendChild(eventSpace);
+            dayNode.appendChild(dayTextNode); 
             daysNode.appendChild(dayNode);
         }
 
         // next month's days
         for (let i = 1; i <= daysNextMonth; i++) {
             let dayNode = document.createElement("div");
+            let dayTextNode = document.createElement("p"); 
+            let eventSpace = document.createElement("div");
+
+            eventSpace.classList.add("event");
+
+            dayTextNode.innerHTML = i;
             dayNode.classList.add("day", "otherMonth");
-            dayNode.innerHTML = i;
+
+            dayNode.appendChild(eventSpace);
+            dayNode.appendChild(dayTextNode); 
             daysNode.appendChild(dayNode);
         }
     }
