@@ -6,14 +6,13 @@
  * 
  * Sam Scott, McMaster University, 2025
  */
+
 try {
     $dbh = new PDO(
-        "mysql:host=localhost;dbname=giftspark",
+        "mysql:host=localhost;dbname=mhaskarp_db",
         "root",
         ""
     );
 } catch (Exception $e) {
     die("ERROR: Couldn't connect. {$e->getMessage()}");
 }
-
-//echo "<p>It worked!!!</p>"; //success message

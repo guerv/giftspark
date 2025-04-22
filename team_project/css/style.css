@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: burlywood;
+    padding: 30px;
+    border-radius: 20px;
+    align-items: center;
+    width: 50%;
+    align-self: center;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px;
+    align-self: center;
+}
+.element {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 1px 1px grey;
+    border: none;
+}
+#color_theme {
+    padding:none;
+    margin-bottom: 20px;
+}
+.submit {
+    background-color: green;
+    padding: 10px;
+    width: 60%;
+    align-self: center;
+    border-radius: 10px;
+    font-size: medium;
+    box-shadow: 1px 2px 1px grey;
+    border: none;
+    margin: 10px;
+}
+.submit:hover{
+    background-color: rgb(2, 86, 2);
+    cursor:pointer;
+}
+
+
+.upcoming_events {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.upcoming_events td, .upcoming_events th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+  
+.upcoming_events tr:nth-child(even){background-color: #f2f2f2;}
+  
+.upcoming_events tr:hover {background-color: #ddd;}
+  
+.upcoming_events th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+.edit {
+    background-color: wheat;
+    padding: 5px;
+    align-self: center;
+    border-radius: 10px;
+    font-size: medium;
+    box-shadow: 1px 2px 1px grey;
+    border: none;
+}
+.edit:hover{
+    background-color: rgb(249, 210, 137);
+    cursor: pointer;
+}
