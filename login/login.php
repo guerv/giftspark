@@ -9,22 +9,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($email) || empty($password)) {
         $error = "All fields are required!";
     } else {
-        $stmt = $dbh->prepare("SELECT user_id, password FROM user_info WHERE email = ?");
+        $stmt = $dbh->prepare("SELECT user_id, `password` FROM user_info WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user) {
-            $user_id = $user['user_id'];
-            $db_password = $user['password'];
+            $user_id = $user['user_id']; 
+            $db_password = $user['password']; //hashed 
 
-            if ($password === $db_password) {
+            if (password_verify($password, $db_password)) {
                 $insert = $dbh->prepare("INSERT INTO user_sessions (user_id) VALUES (?)");
                 $insert->execute([$user_id]);
 
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['email'] = $email;
 
-                header("Location: dashboard.php");
+                //header("Location: dashboard.php");
+                header("Location: /");
                 exit();
             } else {
                 $error = "Invalid email or password!";
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="create/css/style.css">
 
     <style>
         body {
@@ -138,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </head>
 <body>
-    <img src="image/logo.png" alt="Site Logo" class="site-logo">
+    <img src="../images/logo.png" alt="Site Logo" class="site-logo">
 
     <?php if (isset($error)) echo "<p class='error-msg'>$error</p>"; ?>
     <form class="login-box" method="post" action="">
@@ -150,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
     <p style="margin-top: 15px;">
         Don't have an account? 
-        <a href="create/index.html" style="color: #5a3e36; text-decoration: underline;">
+        <a href="../create_acc/index.html" style="color: #5a3e36; text-decoration: underline;">
             Sign up here
         </a>
 </p>

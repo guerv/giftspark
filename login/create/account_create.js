@@ -83,12 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
     async function checkEmailAvailability(email) {
         try {
             emailInput.classList.add('checking');
-            const response = await fetch('php/check_email.php', {
+            const response = await fetch('check_email.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             });
             
+            console.log(response);
+
             if (!response.ok) throw new Error('Network error');
             const data = await response.json();
             return !data.exists;
@@ -164,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Creating Account... <span class="spinner"></span>';
             
-            const response = await fetch('php/create_account.php', {
+            const response = await fetch('create_account.php', {
                 method: 'POST',
                 body: formData
             });
@@ -177,7 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
             
             if (result.success) {
-                window.location.href = 'login.html?signup=success';
+                console.log("here?");
+                window.location.href = 'login.php';
+                console.log("finish?");
             } else {
                 displayServerErrors(result.errors);
             }

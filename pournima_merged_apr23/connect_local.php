@@ -9,7 +9,7 @@
 
 try {
     $dbh = new PDO(
-        "mysql:host=localhost;dbname=mhaskarp_db",
+        "mysql:host=localhost;dbname=giftspark",
         "root",
         ""
     );

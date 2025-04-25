@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../connect.php';
+require_once './connect.php';
 
 // Get and sanitize data
 $firstName = trim($_POST['firstName'] ?? '');
@@ -39,7 +39,7 @@ try {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $fullName = "$firstName $lastName";
     
-    $stmt = $dbh->prepare("INSERT INTO user_info (name, email, password, phone) VALUES (?, ?, ?, ?)");
+    $stmt = $dbh->prepare("INSERT INTO user_info (`name`, email, `password`, phone) VALUES (?, ?, ?, ?)");
     $stmt->execute([$fullName, $email, $hashedPassword, $phone]);
     
     echo json_encode(['success' => true]);

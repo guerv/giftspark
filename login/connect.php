@@ -1,7 +1,7 @@
 <?php
 try {
     $dbh = new PDO(
-        "mysql:host=localhost;dbname=johnn4_db",
+        "mysql:host=localhost;dbname=giftspark",
         "root",
         ""
     );

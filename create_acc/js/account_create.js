@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
             
             if (result.success) {
-                window.location.href = 'login.html?signup=success';
+                window.location.href = '/giftspark/login/login.php'; 
             } else {
                 displayServerErrors(result.errors);
             }
