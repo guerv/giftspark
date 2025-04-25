@@ -1,10 +1,10 @@
 /* ===== BASE STYLES ===== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: sans-serif;
+    background-color: #FDDDCC;
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #293C54;
 }
 
 #container {
@@ -20,24 +20,26 @@ body {
 }
 
 #header_content h1 {
-    background-color: #FFE068;
+    background-color: #F1868A;
     display: inline-block;
     padding: 15px 30px;
     border-radius: 15px;
     font-size: 2.5em;
+    color: #FFEDE3;
 }
 
 #header_content h2 {
     font-weight: normal;
     font-size: 1.2em;
     margin-top: 10px;
+    color: #293C54;
 }
 
 /* ===== CARD STYLES ===== */
 #signup_card, #login_card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: #FFEDE3;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 30px;
     max-width: 600px;
     margin: 0 auto;
@@ -48,7 +50,8 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #FFE068;
+    border-bottom: 2px solid #F1868A;
+    color: #E56B6F;
 }
 
 /* ===== FORM STYLES ===== */
@@ -60,36 +63,34 @@ body {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #293C54;
 }
 
 .form_group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding-right: 0px; 
+    border: 2px solid #F8C9B0;
+    border-radius: 8px;
     font-size: 1em;
+    background-color: #fff;
+    color: #293C54;
 }
+
 
 .form_group input:focus {
-    outline: 2px solid #E0005B;
+    outline: 2px solid #E56B6F;
     outline-offset: -1px;
-}
-
-.form_group small {
-    display: block;
-    font-size: 0.75em;
-    color: #666;
-    margin-top: 4px;
 }
 
 /* ===== BUTTON STYLES ===== */
 #submit_btn, #login_btn {
-    background-color: #E0005B;
-    color: white;
+    background-color: #E56B6F;
+    color: #FFEDE3;
     border: none;
     padding: 12px 20px;
     font-size: 1em;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
@@ -97,70 +98,7 @@ body {
 }
 
 #submit_btn:hover, #login_btn:hover {
-    background-color: #c00050;
-}
-
-.button-loading {
-    position: relative;
-    pointer-events: none;
-}
-
-.button-loading .spinner {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ===== VALIDATION & MESSAGES ===== */
-.error-message {
-    color: #e74c3c;
-    font-size: 0.8em;
-    margin-top: 5px;
-}
-
-input.error {
-    border-color: #e74c3c;
-}
-
-#form-errors, .general-error, .server-errors {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border-left: 4px solid #dc3545;
-}
-
-#form-errors p, .server-errors p {
-    margin: 5px 0;
-}
-
-.success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    text-align: center;
-    border-left: 4px solid #28a745;
-}
-
-/* ===== LOADING STATES ===== */
-input.checking {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23cccccc" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"><animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/></path></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 20px;
+    background-color: #B56576;
 }
 
 /* ===== FOOTER STYLES ===== */
@@ -169,6 +107,7 @@ input.checking {
     margin-top: 30px;
     padding: 20px;
     font-size: 0.9em;
+    color: #293C54;
 }
 
 /* ===== RESPONSIVE STYLES ===== */
