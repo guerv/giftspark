@@ -1,10 +1,19 @@
+/*
+Name: Megann Nkenglack
+MacID: nkenglam
+Student Number: 400590482
+Date: 04-25-2025
+Class: COMPSCI 1XD3 
+About: Final Group Project - GiftSpark
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('signupForm');
     const emailInput = document.getElementById('email');
     let emailChecked = false;
     let emailAvailable = false;
 
-    // 1. Load and display any errors from URL parameters
+    // Load and display any errors from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const errorParam = urlParams.get('errors');
     
@@ -14,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // 2. Real-time email availability check
+    // Real-time email availability check
     emailInput.addEventListener('blur', function() {
         const email = emailInput.value.trim();
         if (!email || !isValidEmail(email)) return;
@@ -31,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 3. Form submission handler
+    // Form submission 
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         clearAllErrors();
@@ -57,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             errorElement.textContent = errorText;
             errorContainer.appendChild(errorElement);
             
-            // Try to associate error with specific field
             const field = guessFieldFromError(errorText);
             if (field) {
                 showError(field, errorText);
