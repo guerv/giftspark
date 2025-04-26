@@ -90,25 +90,24 @@ session_start();
                                     <td><?= $row["notes"] ?></td>
                                     <td>
                                         <form action='edit_event.php' method='post'>
-                                            <input type='hidden' name='name' value='$row[person_name]' required>
-                                            <input type='hidden' name='date' value='$row[birthday_date]' required>
-                                            <input type='hidden' name='reminder' value='$row[reminder_time]' required>
-                                            <input type='hidden' name='colors_theme' value='$row[color_theme]' required>
-
-                                            <input type='hidden' name='notes' value='$row[notes]'>
-                                            <input type='hidden' name='event_id' value='$row[event_id]'>
+                                            <input type='hidden' name='name' value='<?= $row["person_name"] ?>' required>
+                                            <input type='hidden' name='date' value='<?= $row["birthday_date"] ?>' required>
+                                            <input type='hidden' name='reminder' value='<?= $row["reminder_time"] ?>' required>
+                                            <input type='hidden' name='colors_theme' value='<?= $row["color_theme"]?>' required>
+                                            <input type='hidden' name='gifts' value='<?= htmlspecialchars(json_encode($current_gifts)) ?>' required>
+                                            <input type='hidden' name='notes' value='<?= $row["notes"]?>'>
+                                            <input type='hidden' name='event_id' value='<?= $row["event_id"]?>'>
                                             <div id='error-message'></div>
                                             <button type='submit' id='edit-button' class='edit'><i class='fas fa-edit'></i></button>
                                         </form>
                                     </td>
                                     <td>
                                         <form action='delete_event.php' method='post' onsubmit="return confirm('Are you sure you want to delete this event?');">
-                                            <input type='hidden' name='event_id' value='$row[event_id]'>
+                                            <input type='hidden' name='event_id' value='<?= $row["event_id"] ?>'>
                                             <button type='submit' id='delete-button' class='edit'><i class='fas fa-trash-alt'></i></button>
                                         </form>
                                     </td>
-                                </tr>
-            <?php
+                                <?php echo "</tr>";
                             }
                             echo "</table></div>";
                         }
@@ -122,7 +121,7 @@ session_start();
                 echo "<div class='error'> <p>You're logged out.<p> </div>";
                 echo "<a class='edit' href='../login/login.php'>Login</a>";
             }
-            ?>
+                ?>
 </body>
 
 </html>
