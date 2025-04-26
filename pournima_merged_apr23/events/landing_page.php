@@ -79,11 +79,11 @@ session_start();
 
                                     <td>
                                         <?php if (count($current_gifts) >= 1) {
-                                            echo "<li>";
+                                            echo "<ul>";
                                             foreach ($current_gifts as $giftul) {
-                                                echo "<ul>$giftul</ul>";
+                                                echo "<li>$giftul</li>";
                                             }
-                                            echo "</li>";
+                                            echo "</ul>";
                                         } ?>
                                     </td>
 
