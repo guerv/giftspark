@@ -86,7 +86,7 @@ session_start();
             $success_id_recipient = $stmt_id_recipient->execute([]);
 
             if ($recip_id_row = $stmt_id_recipient->fetch()) {
-                $recip_id = $recip_id_row["id"];
+                $recip_id = $recip_id_row["event_id"];
             } else { // no birthday people recorded yet 
                 $recip_id = 1;
             }
