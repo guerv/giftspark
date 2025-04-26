@@ -31,7 +31,7 @@ window.addEventListener("load", function (event) {
             gift_list_node.appendChild(item); // add item to list 
         });
 
-        console.log(gifts);
+        //console.log(gifts);
 
         gifts_to_pass.value = JSON.stringify(gifts);
     }

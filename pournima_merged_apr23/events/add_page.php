@@ -1,5 +1,5 @@
-<?php 
-    session_start();
+<?php
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
     if ($birthdate === null || $birthdate === false) {
         echo "<div class='error'> <p>Invalid birthdate!<p> </div>";
         $error = true;
-    } 
+    }
 
     $reminder = filter_input(INPUT_POST, "reminder", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($reminder === null || $reminder === false) {
@@ -37,6 +37,15 @@
         echo "<div class='error'> <p>Invalid color format!<p> </div>";
         $error = true;
     }
+
+    $gifts = json_decode($_POST["gifts"], true); // should not be false/null
+
+    if (is_array($gifts)) {
+        foreach ($gifts as $gift) {
+            $gift = htmlspecialchars($gift);
+        }
+    }
+
     $notes = filter_input(INPUT_POST, "notes", FILTER_SANITIZE_SPECIAL_CHARS);
     if ($notes === null || $notes === false) {
         echo "<div class='error'> <p> Invalid notes input! <p> </div>";
@@ -47,11 +56,72 @@
         $user_id = $_SESSION['user_id'];
         include '../connect_local.php';
         //include '../connect_server.php';
+
         $insert_command = "INSERT INTO `giftspark_events`(`user_id`, `person_name`, `birthday_date`, `reminder_time`, `color_theme`, `notes`) VALUES (?, ?, ?, ?, ?, ?)";
         $insert_stmt = $dbh->prepare($insert_command);
         $insert_args = [$user_id, $name, $birthdate, $reminder, $color, $notes];
         $insert_success = $insert_stmt->execute($insert_args);
-        if ($insert_success) {
+
+        // preparing command for gift ideas
+        if (count($gifts) > 0) {
+            $cmd_gifts = "INSERT INTO gift_ideas (gift_description) VALUES ";
+            for ($i = 0; $i < count($gifts); $i++) {
+                $cmd_gifts = $cmd_gifts . "(?)";
+                if ($i < count($gifts) - 1) {
+                    $cmd_gifts = $cmd_gifts . ",";
+                }
+            }
+
+            $stmt_gifts = $dbh->prepare($cmd_gifts);
+            $params_gifts = [];
+            foreach ($gifts as $gift) {
+                array_push($params_gifts, $gift);
+            }
+            $success_gifts = $stmt_gifts->execute($params_gifts);
+
+            // linking gifts to the recipient 
+            //1. Must find the id of both the person and gifts
+            $cmd_id_recipient = "SELECT * FROM giftspark_events ORDER BY `event_id` DESC LIMIT 1";
+            $stmt_id_recipient = $dbh->prepare($cmd_id_recipient);
+            $success_id_recipient = $stmt_id_recipient->execute([]);
+
+            if ($recip_id_row = $stmt_id_recipient->fetch()) {
+                $recip_id = $recip_id_row["id"];
+            } else { // no birthday people recorded yet 
+                $recip_id = 1;
+            }
+
+            $limit = count($gifts);
+
+            $cmd_id_gifts = "SELECT * FROM gift_ideas ORDER BY id DESC LIMIT $limit";
+            $stmt_id_gifts = $dbh->prepare($cmd_id_gifts);
+            $success_id_gifts = $stmt_id_gifts->execute([]);
+
+            $gift_ids = [];
+
+            while ($id_gifts_row = $stmt_id_gifts->fetch()) {
+                array_push($gift_ids, $id_gifts_row["id"]);
+            }
+
+            //2. link the gifts to recipients
+            $cmd_link = "INSERT INTO recipient_gifts (recipient_id,gift_id) VALUES ";
+            for ($i = 0; $i < count($gifts); $i++) {
+                $cmd_link = $cmd_link . "(?,?)";
+                if ($i < count($gifts) - 1) {
+                    $cmd_link = $cmd_link . ",";
+                }
+            }
+            $stmt_link = $dbh->prepare($cmd_link);
+            $params_link = [];
+
+            for ($i = 0; $i < count($gifts); $i++) {
+                array_push($params_link, $recip_id);
+                array_push($params_link, $gift_ids[$i]);
+            }
+            $success_link = $stmt_link->execute($params_link);
+        }
+
+        if ($insert_success && $success_gifts && $success_id_recipient && $success_id_gifts && $success_link) {
             if ($insert_stmt->rowCount() == 1) {
                 header("Location: landing_page.php"); // Redirect back to the landing page
                 exit();
@@ -59,6 +129,9 @@
                 echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
             }
         }
+
+
+
     } else {
         echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
     }
