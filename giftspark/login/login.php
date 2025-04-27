@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png" />
 
     <style>
         body {
