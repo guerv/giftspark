@@ -25,7 +25,7 @@ About: GiftSpark landing page displaying all the upcoming events the user has pl
     </div>
     <?php
         //include '../connect_local.php';
-        include '../connect_server.php';
+        include '../connect_local.php';
         if (isset($_SESSION['user_id'])) {
             $user_id = $_SESSION['user_id'];
             //retrieves the name of the user to display

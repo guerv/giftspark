@@ -6,8 +6,8 @@ About: GiftSpark Log in verification page that then redirects to landing page
 -->
 <?php
 session_start();
-//include '../connect_local.php'; 
-include '../connect_server.php';
+include '../connect_local.php'; 
+//include '../connect_server.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //retrieves the post parameters
     $email = $_POST['email'];

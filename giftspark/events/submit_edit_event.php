@@ -58,7 +58,7 @@ About: GiftSpark php handling the updating of an event that has been edited in t
     if ($error != true && isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
         //include '../connect_local.php';
-        include '../connect_server.php';
+        include '../connect_local.php';
         //update command is prepared and executed with all the details updated
         $update_command = "UPDATE `giftspark_events` SET `user_id` = ?, `person_name` = ?, `birthday_date` = ?, `reminder_time` = ?, `color_theme` = ?, `notes` = ? WHERE `event_id` = ?";
         $update_stmt = $dbh->prepare($update_command);

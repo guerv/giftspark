@@ -46,13 +46,16 @@ session_start();
         $error = true;
     }
 
-    $gifts = json_decode($_POST["gifts"], true); // should not be false/null
+    $gifts = json_decode($_POST["gifts"], true); 
 
     if (is_array($gifts)) {
         foreach ($gifts as $gift) {
             $gift = htmlspecialchars($gift);
         }
+    } else {
+        $gifts = [];
     }
+
 
     $notes = filter_input(INPUT_POST, "notes", FILTER_SANITIZE_SPECIAL_CHARS);
     if ($notes === null || $notes === false) {
@@ -126,18 +129,27 @@ session_start();
                 array_push($params_link, $gift_ids[$i]);
             }
             $success_link = $stmt_link->execute($params_link);
-        }
-
-        //after everything has been inserted correctly, the user is redirected back to the landing page with the new event showing in the table
-        if ($insert_success && $success_gifts && $success_id_recipient && $success_id_gifts && $success_link) {
-            if ($insert_stmt->rowCount() == 1) {
-                header("Location: landing_page.php"); // Redirect back to the landing page
-                exit();
-            } else {
-                echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
+            
+            //after everything has been inserted correctly, the user is redirected back to the landing page with the new event showing in the table
+            if ($insert_success && $success_gifts && $success_id_recipient && $success_id_gifts && $success_link) {
+                if ($insert_stmt->rowCount() == 1) {
+                    header("Location: landing_page.php"); // Redirect back to the landing page
+                    exit();
+                } else {
+                    echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
+                }
+            }
+        } else {
+            if ($insert_success)
+                if ($insert_stmt->rowCount() == 1) {
+                    header("Location: landing_page.php"); // Redirect back to the landing page
+                    exit();
+                } else {
+                    echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
+                }
             }
         }
-    } else {
+    else {
         echo "<div class='error'> <p>Error occured, result not saved.<p> </div>";
     }
     //add event form.
