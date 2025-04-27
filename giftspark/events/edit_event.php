@@ -13,6 +13,7 @@ About: GiftSpark php handling for editing an existing event
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/edit_color.js"></script>
+    <link rel="icon" type="image/x-icon" href="../images/logo.png" />
 </head>
 <?php 
     //receives all the current values of the event

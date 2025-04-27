@@ -1,11 +1,12 @@
 <!--
 Name: Natalia Guevara - gifts, Pournima Mhaskar - events
+Student Numbers: 400570316, 
 Date: 04-26-2025
 Class: COMPSCI 1XD3 
 About: GiftSpark HTML form for Adding a new birthday event into the database after error checking and validating inputs received from the add_event.html form.
 -->
-<?php 
-    session_start();
+<?php
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,7 @@ About: GiftSpark HTML form for Adding a new birthday event into the database aft
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <link rel="icon" type="image/x-icon" href="../images/logo.png" />
 </head>
 
 <body>
@@ -30,7 +32,7 @@ About: GiftSpark HTML form for Adding a new birthday event into the database aft
     if ($birthdate === null || $birthdate === false) {
         echo "<div class='error'> <p>Invalid birthdate!<p> </div>";
         $error = true;
-    } 
+    }
 
     $reminder = filter_input(INPUT_POST, "reminder", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     if ($reminder === null || $reminder === false) {
@@ -96,7 +98,7 @@ About: GiftSpark HTML form for Adding a new birthday event into the database aft
             } else { // no birthday people recorded yet 
                 $recip_id = 1;
             }
-        
+
             $limit = count($gifts);
 
             $cmd_id_gifts = "SELECT * FROM gift_ideas ORDER BY id DESC LIMIT $limit";
@@ -125,7 +127,7 @@ About: GiftSpark HTML form for Adding a new birthday event into the database aft
             }
             $success_link = $stmt_link->execute($params_link);
         }
-        
+
         //after everything has been inserted correctly, the user is redirected back to the landing page with the new event showing in the table
         if ($insert_success && $success_gifts && $success_id_recipient && $success_id_gifts && $success_link) {
             if ($insert_stmt->rowCount() == 1) {

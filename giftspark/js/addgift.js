@@ -1,11 +1,11 @@
 /*
 Name: Natalia Guevara - gifts, Pournima Mhaskar - color drop down
+Student Numbers: 400570316, 
 Date: 04-26-2025
 Class: COMPSCI 1XD3 
 About: GiftSpark javascript and AJAX code for gift list feature on the add event page + code for the color drop down element
 */
 window.addEventListener("load", function (event) {
-
 
     let submit_gift = document.getElementById("add_gift");
     let gift_list_node = document.getElementById("gift_list");
@@ -16,6 +16,12 @@ window.addEventListener("load", function (event) {
 
     submit_gift.addEventListener("click", add_gift);
 
+    /**
+     * renders gifts on the add event form
+     * 
+     * @param 
+     * @returns
+     */
     function render_gifts() {
         gift_list_node.innerHTML = "";
 
@@ -37,11 +43,16 @@ window.addEventListener("load", function (event) {
             gift_list_node.appendChild(item); // add item to list 
         });
 
-        //console.log(gifts);
-
         gifts_to_pass.value = JSON.stringify(gifts);
     }
 
+    /**
+     * user adds a new gift
+     * - no. of gifts are limited [1,5]
+     * 
+     * @params
+     * @returns 
+     */
     function add_gift() {
         let new_gift = gift_text.value;
 
@@ -53,6 +64,12 @@ window.addEventListener("load", function (event) {
         render_gifts();
     }
 
+    /**
+     * Removes a gift at specified index
+     * 
+     * @param {Number} index 
+     * @returns
+     */
     function remove_gift(index) {
         gifts.splice(index, 1); //at index, remove 1 item
         render_gifts();
@@ -61,6 +78,13 @@ window.addEventListener("load", function (event) {
 
     //Color drop down select box code:
     let selectbox = document.getElementById("select_color");
+
+    /**
+     * Changes the bg-colour of the select box HTML element
+     * 
+     * @param {HTMLElement} select 
+     * @returns
+     */
     function changeColor(select) {
         selectbox.style['background-color'] = select.value;
     }

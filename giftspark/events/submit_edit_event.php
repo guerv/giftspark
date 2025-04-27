@@ -15,6 +15,7 @@ About: GiftSpark php handling the updating of an event that has been edited in t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <link rel="icon" type="image/x-icon" href="../images/logo.png" />
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
 Name:  Natalia Guevara - gifts, Pournima Mhaskar - events
+Student Numbers: 400570316, 
 Date: 04-26-2025
 Class: COMPSCI 1XD3 
 About: GiftSpark HTML form for Adding a new birthday event
@@ -10,9 +11,13 @@ About: GiftSpark HTML form for Adding a new birthday event
         <title>Result</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
         <link rel="stylesheet" href="../css/style.css" />
         <script src="../js/addgift.js"></script>
+        <link rel="icon" type="image/x-icon" href="../images/logo.png" /> 
     </head>
     <body>
         <div class="form-container">
@@ -44,13 +49,55 @@ About: GiftSpark HTML form for Adding a new birthday event
                     required
                 />
                 Set a custom color theme for your reminder:
-                <select id="select_color" class="element" style="background-color:#ff6363" name="colors_theme" required>
-                    <option class="color_option" value="#ff6363" style="background-color: #ff6363;">Red</option>
-                    <option class="color_option" value="#5cff5c" style="background-color: #5cff5c;">Green</option>
-                    <option class="color_option" value="#4444d3" style="background-color: #4444d3;">Blue</option>
-                    <option class="color_option" value="#cf50cf" style="background-color: #cf50cf;">Magenta</option>
-                    <option class="color_option" value="#c6c651" style="background-color: #c6c651;">Yellow</option>
-                    <option class="color_option" value="#46a7a7" style="background-color: #46a7a7;">Cyan</option>
+                <select
+                    id="select_color"
+                    class="element"
+                    style="background-color: #ff6363"
+                    name="colors_theme"
+                    required
+                >
+                    <option
+                        class="color_option"
+                        value="#ff6363"
+                        style="background-color: #ff6363"
+                    >
+                        Red
+                    </option>
+                    <option
+                        class="color_option"
+                        value="#5cff5c"
+                        style="background-color: #5cff5c"
+                    >
+                        Green
+                    </option>
+                    <option
+                        class="color_option"
+                        value="#4444d3"
+                        style="background-color: #4444d3"
+                    >
+                        Blue
+                    </option>
+                    <option
+                        class="color_option"
+                        value="#cf50cf"
+                        style="background-color: #cf50cf"
+                    >
+                        Magenta
+                    </option>
+                    <option
+                        class="color_option"
+                        value="#c6c651"
+                        style="background-color: #c6c651"
+                    >
+                        Yellow
+                    </option>
+                    <option
+                        class="color_option"
+                        value="#46a7a7"
+                        style="background-color: #46a7a7"
+                    >
+                        Cyan
+                    </option>
                 </select>
 
                 <div>
@@ -58,7 +105,12 @@ About: GiftSpark HTML form for Adding a new birthday event
                 </div>
                 <div>
                     <input class="element" type="text" id="new_gifts" />
-                    <input class="gift_button" type="button" id="add_gift" value="Add Gift!" />
+                    <input
+                        class="gift_button"
+                        type="button"
+                        id="add_gift"
+                        value="Add Gift!"
+                    />
                 </div>
                 <div class="gift_list_card">
                     <ul id="gift_list"></ul>

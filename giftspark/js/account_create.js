@@ -4,10 +4,10 @@ MacID: nkenglam
 Student Number: 400590482
 Date: 04-25-2025
 Class: COMPSCI 1XD3 
-About: Final Group Project - GiftSpark
+About: JS for account creation feedback
 */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('signupForm');
     const emailInput = document.getElementById('email');
     let emailChecked = false;
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load and display any errors from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const errorParam = urlParams.get('errors');
-    
+
     if (errorParam) {
         displayUrlErrors(errorParam);
         // Clean up the URL without reloading
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Real-time email availability check
-    emailInput.addEventListener('blur', function() {
+    emailInput.addEventListener('blur', function () {
         const email = emailInput.value.trim();
         if (!email || !isValidEmail(email)) return;
-        
+
         checkEmailAvailability(email).then(available => {
             emailChecked = true;
             emailAvailable = available;
-            
+
             if (!available) {
                 showError(emailInput, 'Email already registered. Please login instead. :)');
             } else {
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form submission 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
         clearAllErrors();
-        
+
         // Validate all fields
         const isValid = validateAllFields();
-        
+
         if (isValid) {
             await submitFormData(new FormData(form));
         }
@@ -55,39 +55,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== HELPER FUNCTIONS =====
 
+    /**
+     * Decodes + displays error messages
+     * 
+     * @param {String} errorParam 
+     * @returns
+     */
     function displayUrlErrors(errorParam) {
         const errorContainer = document.createElement('div');
         errorContainer.id = 'form-errors';
-        
+
         errorParam.split('||').forEach(error => {
             const errorText = decodeURIComponent(error);
             const errorElement = document.createElement('p');
             errorElement.className = 'error-message';
             errorElement.textContent = errorText;
             errorContainer.appendChild(errorElement);
-            
+
             const field = guessFieldFromError(errorText);
             if (field) {
                 showError(field, errorText);
             }
         });
-        
+
         form.insertBefore(errorContainer, form.firstChild);
     }
 
+    /**
+     * Matches errors displayed on UI to what the errorText reports 
+     * 
+     * @param {String} errorText 
+     * @returns HTMLElement or null
+     */
     function guessFieldFromError(errorText) {
         const lowerError = errorText.toLowerCase();
         if (lowerError.includes('email')) return emailInput;
         if (lowerError.includes('first')) return document.getElementById('firstName');
         if (lowerError.includes('last')) return document.getElementById('lastName');
         if (lowerError.includes('password')) {
-            return lowerError.includes('match') 
+            return lowerError.includes('match')
                 ? document.getElementById('confirmPassword')
                 : document.getElementById('password');
         }
         return null;
     }
 
+    /**
+     * Checks Email through an AJAX request 
+     * 
+     * @param {String} email 
+     * @returns 
+     */
     async function checkEmailAvailability(email) {
         try {
             emailInput.classList.add('checking');
@@ -96,11 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             });
-            
+
             if (!response.ok) throw new Error('Network error');
             const data = await response.json();
             return !data.exists;
-            
+
         } catch (error) {
             console.error('Email check failed:', error);
             showError(emailInput, 'Error checking email availability');
@@ -110,6 +128,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    /**
+     * Validates fields in the create account form
+     * 
+     * @params
+     * @returns Boolean
+     */
     function validateAllFields() {
         let isValid = true;
         const firstName = document.getElementById('firstName');
@@ -166,24 +190,30 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
+    /**
+     * Creates account upon submission through an AJAX request  
+     * 
+     * @param {HTMLFormElement} formData 
+     * @returns 
+     */
     async function submitFormData(formData) {
         const submitBtn = form.querySelector('button[type="submit"]');
         try {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Creating Account... <span class="spinner"></span>';
-            
+
             const response = await fetch('../giftspark/create_acc/create_account.php', {
                 method: 'POST',
                 body: formData
             });
-            
+
             if (response.redirected) {
                 window.location.href = response.url;
                 return;
             }
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
                 window.location.href = '../giftspark/login/login.php?signup=success';
             } else {
@@ -197,23 +227,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    /**
+     * Displays server errors on form
+     * 
+     * @param {Array} errors 
+     * @returns
+     */
     function displayServerErrors(errors) {
         const errorContainer = document.createElement('div');
         errorContainer.className = 'server-errors';
-        
+
         errors.forEach(error => {
             const errorElement = document.createElement('p');
             errorElement.className = 'error-message';
             errorElement.textContent = error;
             errorContainer.appendChild(errorElement);
-            
+
             const field = guessFieldFromError(error);
             if (field) showError(field, error);
         });
-        
+
         form.prepend(errorContainer);
     }
 
+    /**
+     * Display a general error on the form
+     * 
+     * @param {String} message 
+     * @returns
+     */
     function showGeneralError(message) {
         const errorContainer = document.createElement('div');
         errorContainer.className = 'general-error';
@@ -221,6 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
         form.prepend(errorContainer);
     }
 
+    /**
+     * Add the error text to a p element, and append to the field passed in
+     * 
+     * @param {HTMLElement} field 
+     * @param {String} message 
+     * @returns
+     */
     function showError(field, message) {
         clearError(field);
         const errorElement = document.createElement('p');
@@ -230,6 +279,12 @@ document.addEventListener('DOMContentLoaded', function() {
         field.classList.add('error');
     }
 
+    /**
+     * Removes all errors in the given field
+     * 
+     * @param {HTMLElement} field 
+     * @return
+     */
     function clearError(field) {
         const existingError = field.nextElementSibling;
         if (existingError && existingError.classList.contains('error-message')) {
@@ -238,11 +293,20 @@ document.addEventListener('DOMContentLoaded', function() {
         field.classList.remove('error');
     }
 
+    /**
+     * Removes all errors from all fields 
+     */
     function clearAllErrors() {
         document.querySelectorAll('.error-message, .server-errors, .general-error').forEach(el => el.remove());
         document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
     }
 
+    /**
+     * Uses regex to validate an email
+     * 
+     * @param {String} email 
+     * @returns 
+     */
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }

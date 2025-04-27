@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Name: Megann Nkenglack
  * MacID: nkenglam
  * Student Number: 400590482
  * Date: 04-25-2025
  * Class: COMPSCI 1XD3 
- * About: Final Group Project - GiftSpark
+ * About: PHP validation for account creation form
  */
 session_start();
 //require_once '../connect_local.php';
@@ -47,16 +48,14 @@ if (!empty($errors)) {
 try {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $fullName = "$firstName $lastName";
-    
+
     $stmt = $dbh->prepare("INSERT INTO user_info (`name`, `email`, `password`, `phone`) VALUES (?, ?, ?, ?)");
     $stmt->execute([$fullName, $email, $hashedPassword, $phone]);
-    
+
     echo json_encode(['success' => true]);
     exit();
-    
 } catch (PDOException $e) {
     error_log("Account creation failed: " . $e->getMessage());
     echo json_encode(['success' => false, 'errors' => ['System error']]);
     exit();
 }
-?>

@@ -14,6 +14,7 @@ About: GiftSpark php handling for when the user clicks the delete button for an 
     <title>GiftSpark - Landing Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../images/logo.png" />
 </head>
 
 <body>

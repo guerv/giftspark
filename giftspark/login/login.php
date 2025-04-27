@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             justify-content: center;
             align-items: center;
             height: 100vh;
-            flex-direction: column; 
+            flex-direction: column;
         }
 
         .login-box {
@@ -111,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         button {
-            width: 100%; 
+            width: 100%;
             margin-top: 20px;
             padding: 15px;
             background: #eabfbc;
@@ -139,13 +140,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .site-logo {
             display: block;
-            margin-bottom: 20px; 
+            margin-bottom: 20px;
             width: 120px;
             height: auto;
         }
     </style>
 
 </head>
+
 <body>
     <img src="../images/logo.png" alt="Site Logo" class="site-logo">
 
@@ -158,10 +160,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Login</button>
     </form>
     <p style="margin-top: 15px;">
-        Don't have an account? 
+        Don't have an account?
         <a href="../index.html" style="color: #5a3e36; text-decoration: underline;">
             Sign up here
         </a>
     </p>
 </body>
+
 </html>
