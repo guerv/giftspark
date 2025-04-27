@@ -1,0 +1,161 @@
+/*
+Name: Megann Nkenglack
+MacID: nkenglam
+Student Number: 400590482
+Date: 04-25-2025
+Class: COMPSCI 1XD3 
+About: Final Group Project - GiftSpark
+*/
+
+/* ===== BASE STYLES ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f3f0;
+    margin: 0;
+    padding: 0;
+    color: #5a3e36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* ===== CONTAINER ===== */
+#container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+/* ===== HEADER STYLES ===== */
+#header_content {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#header_content h1 {
+    background-color: #eabfbc;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-size: 2.5em;
+    color: #5a3e36;
+}
+
+#header_content h2 {
+    font-weight: normal;
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #7c5b4a;
+}
+
+/* ===== CARD STYLES ===== */
+#signup_card, #login_card {
+    background-color: #fff5f7;
+    border: 2px solid #e6cfc3;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px 50px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#card_title {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eabfbc;
+    color: #5a3e36;
+}
+
+/* ===== FORM STYLES ===== */
+.form_group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form_group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #7c5b4a;
+}
+
+.form_group input {
+    width: 95%;
+    padding: 12px 16px;
+    border: 1px solid #dabfb1;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fffaf9;
+    color: #5a3e36;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+.form_group input:focus {
+    outline: none;
+    border-color: #ffbcbc;
+    box-shadow: 0 0 5px #ffe3e3;
+}
+
+/* ===== BUTTON STYLES ===== */
+#submit_btn, #login_btn {
+    background-color: #eabfbc;
+    color: #5a3e36;
+    border: none;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#submit_btn:hover, #login_btn:hover {
+    background-color: #ddb0ae;
+}
+
+/* ===== FOOTER STYLES ===== */
+#footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #7c5b4a;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 768px) {
+    #signup_card, #login_card {
+        padding: 20px;
+    }
+    
+    #header_content h1 {
+        font-size: 1.8em;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #signup_card, #login_card {
+        padding: 20px 15px;
+    }
+    
+    #header_content h1 {
+        font-size: 1.5em;
+        padding: 10px 15px;
+    }
+    
+    .form_group input {
+        padding: 8px;
+    }
+    
+    #submit_btn, #login_btn {
+        padding: 10px 15px;
+    }
+}
