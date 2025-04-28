@@ -1,6 +1,5 @@
 /*
 Name: Natalia Guevara - gifts, Pournima Mhaskar - color drop down
-Student Numbers: 400570316, 
 Date: 04-26-2025
 Class: COMPSCI 1XD3 
 About: GiftSpark javascript and AJAX code for gift list feature on the add event page + code for the color drop down element
