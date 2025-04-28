@@ -1,7 +1,6 @@
 /*
 Name: Megann Nkenglack
 MacID: nkenglam
-Student Number: 400590482
 Date: 04-25-2025
 Class: COMPSCI 1XD3 
 About: JS for account creation feedback
