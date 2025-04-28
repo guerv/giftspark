@@ -1,6 +1,5 @@
 <!--
 Name: Natalia Guevara - gifts, Pournima Mhaskar - events
-Student Numbers: 400570316, 
 Date: 04-26-2025
 Class: COMPSCI 1XD3 
 About: GiftSpark HTML form for Adding a new birthday event into the database after error checking and validating inputs received from the add_event.html form.
